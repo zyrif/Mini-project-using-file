@@ -1,0 +1,4 @@
+16-10101-2:aaaa:Bob:bob@aiub.edu:Admin
+16-10101-3:aaaa:Anne:anne@gmail.com:User
+16-10103-1:aaaa:Kent:kent@yahoo.com:User
+16-10103-5:aaaa:aaaa:aaa@aaa.aaa:User
