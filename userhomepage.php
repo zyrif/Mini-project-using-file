@@ -7,9 +7,8 @@ if($_SESSION['id'] != "")
 else
 	header("location: logout.php");
 
-$file = fopen("record.txt", "r");
-
-while(!feof($file)){
+if($file = fopen("record.txt", "r")){
+	while(!feof($file)){
 		$line = fgets($file);
 		$records = explode("\n", $line);		
 		
@@ -17,12 +16,18 @@ while(!feof($file)){
 		foreach($records as $item){
 			$data = explode(":", $item);
 			if($data[0] == $id){
-				$name = $data[2];
+				if($data[4] == "User")
+					$name = $data[2];
+				else if ($data[4] == "Admin")
+					header("location: adminhomepage.php");
 			}
 		}
-		
 	}
-
+}
+else {
+	echo "Error: Failed to read login record file.";
+	header("location: login.php");
+}
 
 ?>
 

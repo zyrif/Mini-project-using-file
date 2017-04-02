@@ -7,7 +7,25 @@ if($_SESSION['id'] != "")
 else
 	header("location: logout.php");
 
-$file = fopen("record.txt", "r");
+if($file = fopen("record.txt", "r")){
+
+	while(!feof($file)){
+		$line = fgets($file);
+		$records = explode("\n", $line);		
+		
+		foreach($records as $item){
+			$data = explode(":", $item);
+			if($data[0] == $id){
+				if($data[4] != "Admin"){
+					header("location: userhomepage.php");
+				}
+			}
+		}
+		
+	}
+}
+else
+	header("location: login.php");
 
 ?>
 
@@ -25,7 +43,8 @@ $file = fopen("record.txt", "r");
 		<tr> <td> <p> ID </p> </td> <td> <p> Name </p> </td> <td> <p> Email </p> </td> <td> <p> User Type </p> </td> </tr>
 		
 <?php	
-
+	if($file = fopen("record.txt", "r")){
+		
 		while(!feof($file)){
 			$line = fgets($file);
 			$records = explode("\n", $line);
@@ -37,6 +56,7 @@ $file = fopen("record.txt", "r");
 				}
 			}	
 		}
+	}
 ?>
 		<tr> <td  colspan="4"> <a href="./adminhomepage.php"> Go Home </a> </td> </tr>
 	
